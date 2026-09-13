@@ -1,0 +1,509 @@
+﻿/* =========================================================
+           1. ОСНОВНЫЕ НАСТРОЙКИ И ЦВЕТА ТЕМ
+           =========================================================
+
+           Светлая тема — значения по умолчанию в :root.
+           Тёмная тема — те же переменные переопределяются
+           у html.dark-theme.
+        */
+
+        :root {
+            color-scheme: light;
+            --page-bg: #f3f6fb;
+            --page-text: #24324a;
+            --card-bg: #ffffff;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            --muted-text: #75809a;
+            --border-color: #dfe4ec;
+            --input-bg: #fbfcff;
+            --input-focus-bg: #ffffff;
+            --add-button-bg: #edf3ff;
+            --add-button-text: #3867d6;
+            --clear-button-bg: #eef0f4;
+            --clear-button-text: #555e70;
+            --delete-button-bg: #fff1f1;
+            --delete-button-hover: #ffdede;
+            --delete-button-text: #d94747;
+            --progress-track: #e8ecf3;
+            --goal-bg: #fafbfe;
+            --goal-border: #e6eaf0;
+            --message-bg: #edf3ff;
+            --message-good-bg: #eafaf1;
+            --message-good-text: #176a42;
+            --message-warning-bg: #fff7dd;
+            --message-warning-text: #856404;
+            --message-danger-bg: #fff0f0;
+            --message-danger-text: #a33333;
+            --theme-button-bg: #24324a;
+            --theme-button-text: #ffffff;
+        }
+
+        html.dark-theme {
+            color-scheme: dark;
+            --page-bg: #121826;
+            --page-text: #e8eef8;
+            --card-bg: #1c2436;
+            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            --muted-text: #9aa6bd;
+            --border-color: #2d3a52;
+            --input-bg: #151c2b;
+            --input-focus-bg: #1a2334;
+            --add-button-bg: #243352;
+            --add-button-text: #8bb4ff;
+            --clear-button-bg: #2a3346;
+            --clear-button-text: #c5cddd;
+            --delete-button-bg: #3a2428;
+            --delete-button-hover: #4a2c31;
+            --delete-button-text: #ff8a8a;
+            --progress-track: #2a3348;
+            --goal-bg: #171e2e;
+            --goal-border: #2d3a52;
+            --message-bg: #243352;
+            --message-good-bg: #163528;
+            --message-good-text: #7ddea8;
+            --message-warning-bg: #3a3118;
+            --message-warning-text: #f0d48a;
+            --message-danger-bg: #3a2226;
+            --message-danger-text: #ff9a9a;
+            --theme-button-bg: #edf3ff;
+            --theme-button-text: #24324a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px 90px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--page-bg);
+            color: var(--page-text);
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .app-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .app-nav-link {
+            color: var(--muted-text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .app-nav-link:hover {
+            color: #3867d6;
+        }
+
+        .app-nav-title {
+            color: var(--muted-text);
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           2. ЗАГОЛОВОК
+           ========================================================= */
+
+        .header {
+            margin-bottom: 25px;
+            padding: 30px;
+            background: linear-gradient(135deg, #3867d6, #4b7bec);
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(56, 103, 214, 0.18);
+        }
+
+        .header h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        /* =========================================================
+           3. КАРТОЧКИ ОБЩЕЙ СВОДКИ
+           ========================================================= */
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .summary-card .label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted-text);
+            font-size: 14px;
+        }
+
+        .summary-card .value {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .income-color {
+            color: #1e9e63;
+        }
+
+        .expense-color {
+            color: #e25555;
+        }
+
+        .balance-color {
+            color: #3867d6;
+        }
+
+        .saving-color {
+            color: #8e44ad;
+        }
+
+        /* =========================================================
+           4. ОСНОВНАЯ СЕТКА
+           ========================================================= */
+
+        .budget-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .panel-description {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--muted-text);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           5. СТРОКИ ДОХОДОВ И РАСХОДОВ
+           ========================================================= */
+
+        .budget-row {
+            display: grid;
+            grid-template-columns: minmax(120px, 1fr) 150px 42px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .budget-row input {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--page-text);
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .budget-row input:focus {
+            border-color: #4b7bec;
+            background: var(--input-focus-bg);
+            box-shadow: 0 0 0 3px rgba(75, 123, 236, 0.1);
+        }
+
+        .delete-button {
+            border: none;
+            border-radius: 10px;
+            background: var(--delete-button-bg);
+            color: var(--delete-button-text);
+            cursor: pointer;
+            font-size: 20px;
+            transition: 0.2s;
+        }
+
+        .delete-button:hover {
+            background: var(--delete-button-hover);
+        }
+
+        /* =========================================================
+           6. КНОПКИ
+           ========================================================= */
+
+        .button {
+            display: inline-block;
+            border: none;
+            border-radius: 11px;
+            padding: 12px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-add {
+            margin-top: 8px;
+            background: var(--add-button-bg);
+            color: var(--add-button-text);
+        }
+
+        .button-save {
+            background: #3867d6;
+            color: white;
+        }
+
+        .button-clear {
+            background: var(--clear-button-bg);
+            color: var(--clear-button-text);
+        }
+
+        /* =========================================================
+           7. АНАЛИЗ БЮДЖЕТА
+           ========================================================= */
+
+        .analysis-panel {
+            margin-top: 20px;
+        }
+
+        .analysis-title {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .progress-wrapper {
+            margin-top: 20px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--muted-text);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 18px;
+            background: var(--progress-track);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #f1c40f, #e74c3c);
+            border-radius: 50px;
+            transition: width 0.4s ease;
+        }
+
+        /* =========================================================
+           8. СООБЩЕНИЕ О СОСТОЯНИИ БЮДЖЕТА
+           ========================================================= */
+
+        .budget-message {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 14px;
+            background: var(--message-bg);
+            line-height: 1.6;
+        }
+
+        .budget-message.good {
+            background: var(--message-good-bg);
+            color: var(--message-good-text);
+        }
+
+        .budget-message.warning {
+            background: var(--message-warning-bg);
+            color: var(--message-warning-text);
+        }
+
+        .budget-message.danger {
+            background: var(--message-danger-bg);
+            color: var(--message-danger-text);
+        }
+
+        /* =========================================================
+           9. ЦЕЛЬ НАКОПЛЕНИЙ
+           ========================================================= */
+
+        .goal-box {
+            margin-top: 20px;
+            padding: 18px;
+            border: 1px solid var(--goal-border);
+            border-radius: 15px;
+            background: var(--goal-bg);
+        }
+
+        .goal-box h3 {
+            margin-top: 0;
+        }
+
+        .goal-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .goal-fields label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--muted-text);
+        }
+
+        .goal-fields input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--page-text);
+        }
+
+        #goalResult {
+            margin: 15px 0 0;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           10. НИЖНИЕ КНОПКИ
+           ========================================================= */
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* =========================================================
+           11. ПОДСКАЗКА
+           ========================================================= */
+
+        .tip {
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--muted-text);
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           11.1. КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ
+           =========================================================
+
+           Фиксируется в правом нижнем углу экрана
+           и остаётся видимой при прокрутке страницы.
+        */
+
+        .theme-toggle {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border: none;
+            border-radius: 50%;
+            background: var(--theme-button-bg);
+            color: var(--theme-button-text);
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+            font-size: 24px;
+            line-height: 1;
+            transition: transform 0.2s ease, background 0.25s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        .theme-toggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(75, 123, 236, 0.35);
+        }
+
+        /* =========================================================
+           12. АДАПТАЦИЯ ДЛЯ ПЛАНШЕТА И ТЕЛЕФОНА
+           ========================================================= */
+
+        @media (max-width: 850px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .budget-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            body {
+                padding: 15px 10px 90px;
+            }
+
+            .header {
+                padding: 22px;
+            }
+
+            .header h1 {
+                font-size: 27px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .budget-row {
+                grid-template-columns: 1fr 110px 40px;
+            }
+
+            .goal-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card .value {
+                font-size: 23px;
+            }
+        }

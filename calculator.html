@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Калькулятор семейного бюджета: доходы, расходы, анализ и цели накоплений.">
+    <title>Калькулятор — Семейный бюджет</title>
+
+    <!-- Тема до отрисовки страницы, без «мигания» светлой версии -->
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("familyBudgetTheme") === "dark") {
+                    document.documentElement.classList.add("dark-theme");
+                }
+            } catch (error) {
+                /* LocalStorage может быть недоступен — оставляем светлую тему. */
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="css/calculator.css">
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="app-nav" aria-label="Навигация">
+        <a class="app-nav-link" href="index.html">← На главную</a>
+        <span class="app-nav-title">Калькулятор</span>
+    </nav>
+
+    <header class="header">
+        <h1>Семейный бюджет</h1>
+        <p>
+            Добавьте ежемесячные доходы и расходы семьи.
+            Калькулятор автоматически рассчитает остаток,
+            долю расходов и потенциальные сбережения.
+        </p>
+    </header>
+
+    <section class="summary-grid">
+        <div class="summary-card">
+            <span class="label">Общий доход</span>
+            <span class="value income-color" id="totalIncome">0 ₽</span>
+        </div>
+        <div class="summary-card">
+            <span class="label">Общие расходы</span>
+            <span class="value expense-color" id="totalExpenses">0 ₽</span>
+        </div>
+        <div class="summary-card">
+            <span class="label">Остаток</span>
+            <span class="value balance-color" id="balance">0 ₽</span>
+        </div>
+        <div class="summary-card">
+            <span class="label">Доля сбережений</span>
+            <span class="value saving-color" id="savingPercent">0%</span>
+        </div>
+    </section>
+
+    <section class="budget-grid">
+        <div class="panel">
+            <h2>Доходы</h2>
+            <p class="panel-description">
+                Укажите все ежемесячные источники дохода семьи.
+            </p>
+            <div id="incomeList"></div>
+            <button class="button button-add" onclick="addIncomeRow()">
+                + Добавить доход
+            </button>
+        </div>
+
+        <div class="panel">
+            <h2>Расходы</h2>
+            <p class="panel-description">
+                Добавьте обязательные, бытовые и другие расходы.
+            </p>
+            <div id="expenseList"></div>
+            <button class="button button-add" onclick="addExpenseRow()">
+                + Добавить расход
+            </button>
+        </div>
+    </section>
+
+    <section class="panel analysis-panel">
+        <h2 class="analysis-title">Анализ бюджета</h2>
+
+        <div class="progress-wrapper">
+            <div class="progress-info">
+                <span>Расходы относительно доходов</span>
+                <strong id="expensePercentText">0%</strong>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="expenseProgress"></div>
+            </div>
+        </div>
+
+        <div class="budget-message" id="budgetMessage">
+            Добавьте доходы и расходы, чтобы получить анализ бюджета.
+        </div>
+
+        <div class="goal-box">
+            <h3>Цель накоплений</h3>
+            <div class="goal-fields">
+                <div>
+                    <label for="goalAmount">Сколько хотите накопить</label>
+                    <input
+                        type="number"
+                        id="goalAmount"
+                        min="0"
+                        placeholder="Например, 300000"
+                        oninput="calculateBudget()"
+                    >
+                </div>
+                <div>
+                    <label for="currentSavings">Уже накоплено</label>
+                    <input
+                        type="number"
+                        id="currentSavings"
+                        min="0"
+                        placeholder="Например, 50000"
+                        oninput="calculateBudget()"
+                    >
+                </div>
+            </div>
+            <p id="goalResult">
+                Укажите сумму цели, чтобы рассчитать срок накопления.
+            </p>
+        </div>
+
+        <div class="actions">
+            <button class="button button-save" onclick="saveBudget()">
+                Сохранить бюджет
+            </button>
+            <button class="button button-clear" onclick="clearBudget()">
+                Очистить всё
+            </button>
+        </div>
+
+        <p class="tip">
+            Данные сохраняются только в браузере на вашем устройстве
+            с помощью LocalStorage и никуда не отправляются.
+        </p>
+    </section>
+
+</div>
+
+<button
+    type="button"
+    class="theme-toggle"
+    id="themeToggle"
+    aria-label="Переключить тему"
+    title="Переключить тему"
+>
+    <span id="themeToggleIcon" aria-hidden="true">🌙</span>
+</button>
+
+<script src="js/calculator.js"></script>
+</body>
+</html>
